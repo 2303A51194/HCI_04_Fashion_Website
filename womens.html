@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PRIYA FASHION</title>
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Montserrat:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Chivo:300,700|Playfair+Display:700i" rel="stylesheet">
+    <link rel="stylesheet" href="css/style_index.css">
+    <link rel="stylesheet" href="css/demo.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/categories.css">
+    <link rel="stylesheet" href="css/merlin.css">
+    <style>
+       
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .category, .kurti, .western {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px;
+            flex-wrap: wrap;
+        }
+        .category img, .kurti img, .western img {
+            cursor: pointer;
+            max-width: 200px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .category img:hover, .kurti img:hover, .western img:hover {
+            transform: scale(1.1);
+            border-color: #000;
+        }
+        .add-to-cart {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+       
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            display: flex;
+            justify-content: space-between;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 70%;
+            max-width: 1000px;
+            position: relative;
+        }
+        .modal-left-preview {
+            width: 30%;
+            text-align: center;
+        }
+        .modal-left-preview img {
+            max-width: 100%;
+            height: auto;
+            opacity: 0.7;
+            border-radius: 10px;
+        }
+        .modal-main {
+            width: 60%;
+            text-align: center;
+        }
+        .modal-main img {
+            max-width: 100%;
+            height: auto;
+        }
+        .modal-main h2, .modal-main p {
+            margin-bottom: 15px;
+        }
+        .modal-main select {
+            padding: 8px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 50%;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+        .cart {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .cart h4 {
+            margin: 0;
+        }
+        .cart-items {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .payment-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .payment-modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <h3><a href="PRIYA.html" class="logo-name">Priya Fashion</a></h3>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="login.html" id="login">Login</a></li>
+        </ul>
+    </nav>
+    
+    <h1>Women Clothing</h1>
+    <h2>For Her - Kurti</h2>
+    <div class="kurti">
+        <img src="images/products-img/women/kurti1.png" alt="Kurti 1" onclick="openModal(0)">
+        <img src="images/products-img/women/kurti2.png" alt="Kurti 2" onclick="openModal(1)">
+        <img src="images/products-img/women/kurti3.png" alt="Kurti 3" onclick="openModal(2)">
+        <img src="images/products-img/women/kurti4.png" alt="Kurti 4" onclick="openModal(3)">
+    </div>
+
+    <h2>For Her - Western Wear</h2>
+    <div class="western">
+        <img src="images/products-img/women/western1.png" alt="Western 1" onclick="openModal(4)">
+        <img src="images/products-img/women/western2.png" alt="Western 2" onclick="openModal(5)">
+        <img src="images/products-img/women/western3.png" alt="Western 3" onclick="openModal(6)">
+        <img src="images/products-img/women/western4.png" alt="Western 4" onclick="openModal(7)">
+    </div>
+
+    <h2>For Her - Heels</h2>
+    <div class="category">
+        <img src="images/products-img/women/heels1.png" alt="Heels 1" onclick="openModal(8)">
+        <img src="images/products-img/women/heels2.png" alt="Heels 2" onclick="openModal(9)">
+        <img src="images/products-img/women/heels3.png" alt="Heels 3" onclick="openModal(10)">
+        <img src="images/products-img/women/heels4.png" alt="Heels 4" onclick="openModal(11)">
+    </div>
+
+    <div id="product-modal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <div class="modal-left-preview">
+                <img id="left-preview-img" src="" alt="Next Product">
+            </div>
+            <div class="modal-main">
+                <img id="modal-img" src="" alt="Product Image">
+                <h2 id="modal-title"></h2>
+                <p id="modal-price"></p>
+                <div id="modal-sizes">
+                    <h4>Select Size:</h4>
+                    <select id="size-select">
+                        <option value="S">Small (S)</option>
+                        <option value="M">Medium (M)</option>
+                        <option value="L">Large (L)</option>
+                        <option value="XL">Extra Large (XL)</option>
+                    </select>
+                </div>
+                <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+            </div>
+            <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+            <a class="next" onclick="changeImage(1)">&#10095;</a>
+        </div>
+    </div>
+
+    <div class="cart">
+        <h4>Cart</h4>
+        <div id="cart-items" class="cart-items"></div>
+        <button class="add-to-cart" onclick="openPaymentModal()">Make Payment</button>
+    </div>
+
+    <div id="payment-modal" class="payment-modal">
+        <div class="payment-modal-content">
+            <h2>Your Cart</h2>
+            <div id="payment-items"></div>
+            <h3>Total: ₹<span id="total-price"></span></h3>
+            <button onclick="proceedToPayment()">Proceed</button>
+        </div>
+    </div>
+
+    <div id="payment-success-modal" class="payment-modal">
+        <div class="payment-modal-content">
+            <h2 style="color: #000;">Payment Successful!</h2>
+            <button onclick="closePaymentSuccess()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        let currentProductIndex = 0;
+        let cart = [];
+
+        const products = [
+            { image: "images/products-img/women/kurti1.png", title: "Kurti 1", price: 899 },
+            { image: "images/products-img/women/kurti2.png", title: "Kurti 2", price: 999 },
+            { image: "images/products-img/women/kurti3.png", title: "Kurti 3", price: 799 },
+            { image: "images/products-img/women/kurti4.png", title: "Kurti 4", price: 1099 },
+            { image: "images/products-img/women/western1.png", title: "Western Wear 1", price: 1599 },
+            { image: "images/products-img/women/western2.png", title: "Western Wear 2", price: 1299 },
+            { image: "images/products-img/women/western3.png", title: "Western Wear 3", price: 1399 },
+            { image: "images/products-img/women/western4.png", title: "Western Wear 4", price: 1499 },
+            { image: "images/products-img/women/heels1.png", title: "Heels 1", price: 1199 },
+            { image: "images/products-img/women/heels2.png", title: "Heels 2", price: 1399 },
+            { image: "images/products-img/women/heels3.png", title: "Heels 3", price: 1599 },
+            { image: "images/products-img/women/heels4.png", title: "Heels 4", price: 1499 }
+        ];
+
+        function openModal(index) {
+            currentProductIndex = index;
+            const product = products[index];
+            document.getElementById('modal-img').src = product.image;
+            document.getElementById('modal-title').textContent = product.title;
+            document.getElementById('modal-price').textContent = `₹${product.price}`;
+            document.getElementById('left-preview-img').src = products[(index - 1 + products.length) % products.length].image;
+            document.getElementById('product-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('product-modal').style.display = 'none';
+        }
+
+        function changeImage(direction) {
+            currentProductIndex = (currentProductIndex + direction + products.length) % products.length;
+            const product = products[currentProductIndex];
+            document.getElementById('modal-img').src = product.image;
+            document.getElementById('modal-title').textContent = product.title;
+            document.getElementById('modal-price').textContent = `₹${product.price}`;
+            document.getElementById('left-preview-img').src = products[(currentProductIndex - 1 + products.length) % products.length].image;
+        }
+
+        function addToCart() {
+            const product = products[currentProductIndex];
+            cart.push(product);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            cartItemsDiv.innerHTML = '';
+            cart.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.innerHTML = `${item.title} - ₹${item.price}`;
+                cartItemsDiv.appendChild(cartItem);
+            });
+        }
+
+        function openPaymentModal() {
+            let totalPrice = 0;
+            const paymentItemsDiv = document.getElementById('payment-items');
+            paymentItemsDiv.innerHTML = '';
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.innerHTML = `${item.title} - ₹${item.price}`;
+                paymentItemsDiv.appendChild(itemDiv);
+                totalPrice += item.price;
+            });
+            document.getElementById('total-price').textContent = totalPrice;
+            document.getElementById('payment-modal').style.display = 'flex';
+        }
+
+        function proceedToPayment() {
+            document.getElementById('payment-modal').style.display = 'none';
+            document.getElementById('payment-success-modal').style.display = 'flex';
+        }
+
+        function closePaymentSuccess() {
+            document.getElementById('payment-success-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
